@@ -1,36 +1,33 @@
 import React, {useState} from 'react';
 import "./Header.css";
 import SearchForm from "../../components/SearchForm/SearchForm";
-import axios from "axios";
 import Book from "../../components/BookList/BookList";
+import {searchBooks} from "../../api/GoogleBooksApi";
 
 const Home = () => {
     const [booksData, setBooksData] = useState([]);
     const handleSubmit = async (data) => {
-        if (data === null) return
-        console.log(data)
+        if (data === null) return;
         const search = data.trim();
-        // AIzaSyC4qAS30RwAPFZeNCn_lixM0Ua1lQF4H1k
-        await axios.get('https://www.googleapis.com/books/v1/volumes?q=' + search + '&key=AIzaSyC4qAS30RwAPFZeNCn_lixM0Ua1lQF4H1k' + '&maxResults=40')
-            .then(res => {
-                if (res.data.totalItems > 0 && res.data.items.length > 0) {
-                    const books = res.data.items.map((item) => {
-                        let thumbnail = item.volumeInfo.imageLinks && item.volumeInfo.imageLinks.smallThumbnail;
-                        if (thumbnail !== undefined) {
-                            return {
-                                "book_id": item.id,
-                                "selfLink": item.selfLink,
-                                "title": item.volumeInfo.title,
-                                "thumbnail": thumbnail,
-                                "authors": item.volumeInfo.authors.join(", "),
-                                "publishedDate": item.volumeInfo.publishedDate
-                            }
+        await searchBooks(search).then(res => {
+            if (res.data.totalItems > 0 && res.data.items.length > 0) {
+                // eslint-disable-next-line array-callback-return
+                const books = res.data.items.map((item) => {
+                    let thumbnail = item.volumeInfo.imageLinks && item.volumeInfo.imageLinks.smallThumbnail;
+                    if (thumbnail !== undefined) {
+                        return {
+                            "book_id": item.id,
+                            "selfLink": item.selfLink,
+                            "title": item.volumeInfo.title,
+                            "thumbnail": thumbnail,
+                            "authors": item.volumeInfo.authors.join(", "),
+                            "publishedDate": item.volumeInfo.publishedDate
                         }
-                    }).filter(item => item !== undefined)
-                    setBooksData(books)
-                    console.log('books', booksData)
-                }
-            })
+                    }
+                }).filter(item => item !== undefined)
+                setBooksData(books)
+            }
+        })
             .catch(err => setBooksData([]))
     }
     return (

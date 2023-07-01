@@ -1,46 +1,44 @@
 import "./BookDetails.css"
 import coverImg from "../../images/cover_not_found.jpg";
 import {useEffect, useState} from "react";
-import axios from "axios";
 import Loading from "../Loader/Loader"
+import {getBookDetails} from "../../api/GoogleBooksApi";
 
 const BookDetailsModal = ({show, item, onClose}) => {
     const [bookInfo, setBookInfo] = useState(null)
     const [loading, setLoading] = useState(false);
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    async function bookDetails() {
+        await getBookDetails(item.selfLink)
+            .then(res => {
+                if (res.status === 200) {
+                    const book = res.data
+                    let bookInfos = {
+                        "title": book.volumeInfo.title,
+                        "thumbnail": item.thumbnail ? item.thumbnail : coverImg,
+                        "publisher": book.volumeInfo.publisher,
+                        "publishedDate": book.volumeInfo.publishedDate,
+                        "previewLink": book.volumeInfo.previewLink,
+                        "description": book.volumeInfo.description,
+                    }
+                    bookInfos = {...item, ...bookInfos}
+                    setBookInfo(bookInfos)
+                    setLoading(false);
+                }
+            })
+            .catch(err => {
+                console.log(err)
+                setLoading(false);
+            })
+    }
+
     useEffect(() => {
         if (item) {
             setLoading(true);
-
-            async function getBookDetails() {
-                await axios.get(item.selfLink)
-                    .then(res => {
-                        if (res.status == 200) {
-                            const book = res.data
-                            let bookInfos = {
-                                "title": book.volumeInfo.title,
-                                "thumbnail": item.thumbnail ? item.thumbnail : coverImg,
-                                "publisher": book.volumeInfo.publisher,
-                                "publishedDate": book.volumeInfo.publishedDate,
-                                "previewLink": book.volumeInfo.previewLink,
-                                "description": book.volumeInfo.description,
-                            }
-                            bookInfos = {...item, ...bookInfos}
-                            setBookInfo(bookInfos)
-                            setLoading(false);
-                        }
-                    })
-                    .catch(err => {
-                        console.log(err)
-                        setLoading(false);
-                    })
-            }
-
-            getBookDetails()
-
+            bookDetails().then(() => console.log())
         }
-    }, [item])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     if (!show) {
         return null;
@@ -61,13 +59,13 @@ const BookDetailsModal = ({show, item, onClose}) => {
                                 <div className="info">
                                     <h1>{bookInfo.title}</h1>
                                     <h3>{bookInfo.authors}</h3>
-                                    <h4>{bookInfo.publisher}<span>{bookInfo.publishedDate}</span></h4><br/>
-                                    <a href={bookInfo.previewLink} target="_blank">
+                                    <h4>{bookInfo.publisher}<span>  {bookInfo.publishedDate}</span></h4><br/>
+                                    <a href={bookInfo.previewLink} target="_blank" rel="noreferrer">
                                         <button>More</button>
                                     </a>
                                 </div>
                             </div>
-                            <h4 className="description">{ bookInfo.description }</h4>
+                            <h4 className="description">{bookInfo.description}</h4>
                         </div>
                     </div>
                     : null

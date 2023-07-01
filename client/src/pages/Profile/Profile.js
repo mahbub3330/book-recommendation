@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import "./Profile.css";
 import aboutImg from "../../images/about-img.jpg";
 import {Avatar, Box, Button, Container, CssBaseline, TextField, Typography} from "@mui/material";
