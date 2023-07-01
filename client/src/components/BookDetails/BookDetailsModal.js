@@ -46,7 +46,6 @@ const BookDetailsModal = ({show, item, onClose}) => {
 
     if (loading) return <Loading/>;
 
-    // let thumbnail = item.volumeInfo.imageLinks && item.volumeInfo.imageLinks.smallThumbnail;
     return (
         <>
             {
