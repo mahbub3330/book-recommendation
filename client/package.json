@@ -19,6 +19,7 @@
     "react": "^18.2.0",
     "react-bootstrap": "^2.8.0",
     "react-dom": "^18.2.0",
+    "react-icons": "^4.10.1",
     "react-image-gallery": "^1.2.12",
     "react-leaflet": "^4.2.1",
     "react-leaflet-geosearch": "^0.3.4",
