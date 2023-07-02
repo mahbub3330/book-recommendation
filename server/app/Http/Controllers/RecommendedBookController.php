@@ -2,84 +2,62 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RecommendedBookRequest;
+use App\Http\Resources\RecommendedBookCollection;
+use App\Http\Resources\RecommendedBookResource;
 use App\Models\RecommendedBook;
-use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
+use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class RecommendedBookController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the Recommended Books of an user.
      *
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
-    public function index()
+    public function index($userId): JsonResponse
     {
-        //
+        try {
+            $recommendedBooks = RecommendedBook::query()
+                ->where('user_id', $userId)
+                ->paginate();
+            return response()->json((new RecommendedBookCollection($recommendedBooks)), ResponseAlias::HTTP_OK);
+        } catch (\Exception $exception) {
+            return response()->json($exception->getMessage(), $exception->getCode());
+        }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created recommended book resource.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param RecommendedBookRequest $request
+     * @param RecommendedBook $recommendedBook
+     * @return JsonResponse
      */
-    public function store(Request $request)
+    public function store(RecommendedBookRequest $request, RecommendedBook $recommendedBook): JsonResponse
     {
-        //
+        try {
+            $recommendedBook = $recommendedBook->fill($request->all())->save();
+            return response()->json($recommendedBook, ResponseAlias::HTTP_CREATED);
+        } catch (\Exception $exception) {
+            return response()->json($exception->getMessage(), $exception->getCode());
+        }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\RecommendedBook  $recommendedBook
-     * @return \Illuminate\Http\Response
+     * @param RecommendedBook $recommendedBook
+     * @return JsonResponse
      */
-    public function show(RecommendedBook $recommendedBook)
+    public function show(RecommendedBook $recommendedBook): JsonResponse
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\RecommendedBook  $recommendedBook
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(RecommendedBook $recommendedBook)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\RecommendedBook  $recommendedBook
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, RecommendedBook $recommendedBook)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\RecommendedBook  $recommendedBook
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(RecommendedBook $recommendedBook)
-    {
-        //
+        try {
+            return response()->json((new RecommendedBookResource($recommendedBook)), ResponseAlias::HTTP_OK);
+        } catch (\Exception $exception) {
+            return \response()->json($exception->getMessage(), $exception->getCode());
+        }
     }
 }
