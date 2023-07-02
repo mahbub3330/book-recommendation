@@ -3,12 +3,16 @@ import "./Header.css";
 import SearchForm from "../../components/SearchForm/SearchForm";
 import Book from "../../components/BookList/BookList";
 import {searchBooks} from "../../api/GoogleBooksApi";
+import Loading from "../../components/Loader/Loader"
 
 const Home = () => {
     const [booksData, setBooksData] = useState([]);
+    const [loading, setLoading] = useState(false);
+
     const handleSubmit = async (data) => {
         if (data === null) return;
         const search = data.trim();
+        setLoading(true);
         await searchBooks(search).then(res => {
             if (res.data.totalItems > 0 && res.data.items.length > 0) {
                 // eslint-disable-next-line array-callback-return
@@ -26,10 +30,16 @@ const Home = () => {
                     }
                 }).filter(item => item !== undefined)
                 setBooksData(books)
+                setLoading(false);
             }
         })
-            .catch(err => setBooksData([]))
+            .catch(err => {
+                setLoading(false);
+                setBooksData([])
+            })
     }
+
+
     return (
         <>
             <div className='holder'>
@@ -44,7 +54,11 @@ const Home = () => {
                     </div>
                 </header>
             </div>
-            <Book bookList={booksData}/>
+            {
+                loading ? <Loading/>
+                    : <Book bookList={booksData}/>
+            }
+
         </>
     )
 }

@@ -1,26 +1,34 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import "./Profile.css";
-import aboutImg from "../../images/about-img.jpg";
 import {Avatar, Box, Button, Container, CssBaseline, TextField, Typography} from "@mui/material";
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
+import Book from "../../components/BookList/BookList";
+import {getUserWiseRecommendedBooks} from "../../api/RecommendedBookApi";
 
 const Profile = ({userId, onSubmit}) => {
 
     const defaultTheme = createTheme();
+    const [booksData, setBooksData] = useState([]);
 
     useEffect(() => {
         if (userId) {
-
-            console.log(userId)
-
+            getUserWiseRecommendedBooks(userId).then((res) => {
+                if (res.status === 200) {
+                    if (res.data.data.length > 0) {
+                        setBooksData(res.data.data)
+                    }
+                }
+            }).catch(err => {
+                console.log(err)
+                setBooksData([])
+            })
         }
     }, [userId])
 
     const handleSignIn = (event) => {
         event.preventDefault();
         onSubmit(event)
-
     }
 
     return (
@@ -30,31 +38,10 @@ const Profile = ({userId, onSubmit}) => {
                     userId ?
                         <>
                             <div className='section-title'>
-                                <h2>About</h2>
+                                <h2>Recommended Book List</h2>
                             </div>
 
-                            <div className='about-content grid'>
-                                <div className='about-img'>
-                                    <img src={aboutImg} alt=""/>
-                                </div>
-                                <div className='about-text'>
-                                    <h2 className='about-title fs-26 ls-1'>About BookHub</h2>
-                                    <p className='fs-17'>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Accusamus
-                                        dignissimos consequuntur vero commodi provident maiores, iusto atque corrupti
-                                        voluptate vel
-                                        sequi consectetur unde aliquam corporis saepe animi non, tempora reiciendis
-                                        molestias sed
-                                        laudantium dolores. Assumenda aperiam fuga quo voluptate commodi ullam aliquam
-                                        expedita
-                                        voluptas delectus.</p>
-                                    <p className='fs-17'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor,
-                                        dicta,
-                                        possimus inventore eveniet atque voluptatibus repellendus aspernatur illo
-                                        aliquam
-                                        dignissimos illum. Commodi, porro omnis dolore amet neque modi quas eum!</p>
-                                </div>
-                            </div>
+                            <Book bookList={booksData}/>
                         </>
                         :
                         <ThemeProvider theme={defaultTheme}>

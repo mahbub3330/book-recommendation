@@ -7,14 +7,15 @@ import Profile from "./pages/Profile/Profile"
 import Home from "./pages/Home/Home";
 import RoutesPath from "./RoutesPath";
 
-function App() {
+function App(key, value) {
     const [signInStatus, setSignInStatus] = useState(() => window.localStorage.getItem("signInStatus") || false)
     const [userId, setUserId] = useState(() => window.localStorage.getItem("userId") || null);
     const handleSignIn = (event) => {
-        setUserId(1)
+        const loginUserId = 1;
+        setUserId(loginUserId)
         setSignInStatus(true)
-        window.localStorage.setItem("signInStatus", signInStatus)
-        window.localStorage.setItem("userId", userId)
+        window.localStorage.setItem('userId', loginUserId)
+        window.localStorage.setItem("signInStatus", true)
     };
 
     const handleSignOut = () => {
