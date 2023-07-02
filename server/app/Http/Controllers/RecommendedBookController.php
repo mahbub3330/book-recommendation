@@ -12,8 +12,9 @@ use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 class RecommendedBookController extends Controller
 {
     /**
-     * Display a listing of the Recommended Books of an user.
+     * Display a listing of the Recommended Books of a user.
      *
+     * @param $userId
      * @return JsonResponse
      */
     public function index($userId): JsonResponse
