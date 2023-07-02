@@ -5,33 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2b894a41-8b21-4db7-bab7-0d86c5a45402" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/BookList/Book.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/BookList/BookList.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/BookList/BookList.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Header/Header.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Header/Header.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Loader/Loader.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Loader/Loader.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Navbar/Navbar.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/SearchForm/SearchForm.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/SearchForm/SearchForm.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/images/about-img.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/images/cover_not_found.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/images/library-img.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/images/loader.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/images/logo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/Home/Home.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/Profile/Profile.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/Profile/Profile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.test.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/logo.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reportWebVitals.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/setupTests.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/RecommendedBookApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/RecommendedBookApi.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/BookDetails/BookDetails.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/BookDetails/BookDetails.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/BookDetails/BookDetailsModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/BookDetails/BookDetailsModal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/app/Http/Controllers/RecommendedBookController.php" beforeDir="false" afterPath="$PROJECT_DIR$/../server/app/Http/Controllers/RecommendedBookController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/app/Http/Requests/RecommendedBookRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/../server/app/Http/Requests/RecommendedBookRequest.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,7 +36,7 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/home/mahbub3330/Documents/Book/book-recommendation/client/src/components",
+    "last_opened_file_path": "/home/mahbub3330/Documents/Book/book-recommendation/server",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -85,6 +64,7 @@
       <option name="presentableId" value="Default" />
       <updated>1688212735565</updated>
       <workItem from="1688212737368" duration="15915000" />
+      <workItem from="1688290530791" duration="4133000" />
     </task>
     <servers />
   </component>

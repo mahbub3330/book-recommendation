@@ -3,10 +3,14 @@ import coverImg from "../../images/cover_not_found.jpg";
 import {useEffect, useState} from "react";
 import Loading from "../Loader/Loader"
 import {getBookDetails} from "../../api/GoogleBooksApi";
+import {Button, TextField} from "@mui/material";
+import {storeRecommendedBook} from "../../api/RecommendedBookApi";
 
 const BookDetailsModal = ({show, item, onClose}) => {
     const [bookInfo, setBookInfo] = useState(null)
     const [loading, setLoading] = useState(false);
+    const [recommend, setRecommend] = useState(false);
+    const [email, setEmail] = useState(null)
 
     async function bookDetails() {
         await getBookDetails(item.selfLink)
@@ -32,6 +36,34 @@ const BookDetailsModal = ({show, item, onClose}) => {
             })
     }
 
+    const submitRecommendation = () => {
+        if (email) {
+            const params = {
+                'email': email,
+                'book_id': bookInfo.book_id,
+                'self_link': bookInfo.selfLink,
+                'title': bookInfo.title,
+                'thumbnail': bookInfo.thumbnail,
+                'authors': bookInfo.authors,
+                'published_date': bookInfo.publishedDate,
+            }
+            storeRecommendedBook(params).then(res => {
+                if (res.status === 201) {
+                    alert('Recommended Successfully')
+                }
+                if (res.status === 200 && res.data.success === false) {
+                    const bookIdErr = res.data.data['book_id'] ? res.data.data['book_id'][0] : "";
+                    const userIdErr = res.data.data['email'] ? res.data.data['email'][0] : "";
+                    alert(bookIdErr + ' ' + userIdErr)
+                }
+            }).catch(err => {
+                console.log(err.response.data)
+                alert('something went wrong!')
+            })
+        }
+        setRecommend(!recommend)
+        setEmail(null)
+    }
     useEffect(() => {
         if (item) {
             setLoading(true);
@@ -63,7 +95,29 @@ const BookDetailsModal = ({show, item, onClose}) => {
                                         <button>More</button>
                                     </a>
                                 </div>
+
                             </div>
+
+                            {
+                                recommend ?
+                                    <div className="margin-top">
+                                        <TextField
+                                            label="Email"
+                                            id="outlined-size-small"
+                                            placeholder="Enter Email"
+                                            size="small"
+                                            onChange={(e) => setEmail(e.target.value)}
+                                        />
+                                        <Button variant="contained"
+                                                onClick={submitRecommendation}>Submit</Button>
+                                    </div>
+                                    : <div className="margin-top">
+                                        <Button variant="contained"
+                                                onClick={() => setRecommend(!recommend)}>Recommend</Button>
+                                    </div>
+
+                            }
+
                             <h4 className="description">{bookInfo.description}</h4>
                         </div>
                     </div>
