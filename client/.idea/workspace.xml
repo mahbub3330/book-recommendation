@@ -5,12 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2b894a41-8b21-4db7-bab7-0d86c5a45402" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/RecommendedBookApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/RecommendedBookApi.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/BookDetails/BookDetails.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/BookDetails/BookDetails.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/BookDetails/BookDetailsModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/BookDetails/BookDetailsModal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/app/Http/Controllers/RecommendedBookController.php" beforeDir="false" afterPath="$PROJECT_DIR$/../server/app/Http/Controllers/RecommendedBookController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/app/Http/Requests/RecommendedBookRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/../server/app/Http/Requests/RecommendedBookRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/images/library-img.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/images/library-img.jpg" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,7 +31,7 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/home/mahbub3330/Documents/Book/book-recommendation/server",
+    "last_opened_file_path": "/home/mahbub3330/Documents/Book/book-recommendation/client/src/images",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -64,7 +59,7 @@
       <option name="presentableId" value="Default" />
       <updated>1688212735565</updated>
       <workItem from="1688212737368" duration="15915000" />
-      <workItem from="1688290530791" duration="4133000" />
+      <workItem from="1688290530791" duration="4438000" />
     </task>
     <servers />
   </component>
