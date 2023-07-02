@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Models\User;
+use App\Rules\RecommendedBookUserRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator;
@@ -26,11 +28,12 @@ class RecommendedBookRequest extends FormRequest
      */
     public function rules(): array
     {
-        $user_id = $this->request->get('user_id');
+        $user = User::query()->where('email', $this->request->get('email'))->first();
+        $userId = $user['id'] ?? null;
         return [
-            'user_id' => 'required',
-            'book_id' => ['required', Rule::unique('recommended_books')->where(function ($query) use ($user_id) {
-                return $query->where('user_id', $user_id);
+            'email' => ['required', new RecommendedBookUserRule()],
+            'book_id' => ['required', Rule::unique('recommended_books')->where(function ($query) use ($userId) {
+                return $query->where('user_id', $userId);
             })],
         ];
     }
@@ -42,7 +45,7 @@ class RecommendedBookRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'user_id.required' => 'You must have to enter an user',
+            'email.required' => 'You must have to enter a user email.',
             'book_id.recommended_books' => 'This book is Already attached with the user',
             'book_id.required' => 'A valid Recommended Book is required'
         ];
@@ -51,9 +54,9 @@ class RecommendedBookRequest extends FormRequest
     public function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(response()->json([
-            'success'   => false,
-            'message'   => 'Validation errors',
-            'data'      => $validator->errors()
+            'success' => false,
+            'message' => 'Validation errors',
+            'data' => $validator->errors()
         ]));
     }
 }

@@ -6,6 +6,7 @@ use App\Http\Requests\RecommendedBookRequest;
 use App\Http\Resources\RecommendedBookCollection;
 use App\Http\Resources\RecommendedBookResource;
 use App\Models\RecommendedBook;
+use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
@@ -40,6 +41,7 @@ class RecommendedBookController extends Controller
     public function store(RecommendedBookRequest $request, RecommendedBook $recommendedBook): JsonResponse
     {
         try {
+            $request['user_id'] = $user = User::query()->where('email', $request->email)->first()['id'];
             $recommendedBook = $recommendedBook->fill($request->all())->save();
             return response()->json($recommendedBook, ResponseAlias::HTTP_CREATED);
         } catch (\Exception $exception) {
