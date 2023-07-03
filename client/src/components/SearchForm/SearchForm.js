@@ -9,24 +9,6 @@ const SearchForm = ({onSubmit}) => {
         onSubmit(searchText)
     }
 
-    // const {setSearchTerm, setResultTitle} = useState(null);
-    // const searchText = useRef('');
-    // const navigate = useNavigate();
-    //
-    // useEffect(() => searchText.current.focus(), []);
-    // const handleSubmit = (e) => {
-    //   e.preventDefault();
-    //   let tempSearchTerm = searchText.current.value.trim();
-    //   if((tempSearchTerm.replace(/[^\w\s]/gi,"")).length === 0){
-    //     setSearchTerm("the lost world");
-    //     setResultTitle("Please Enter Something ...");
-    //   } else {
-    //     setSearchTerm(searchText.current.value);
-    //   }
-    //
-    //   navigate("/book");
-    // };
-
     return (
         <div className='search-form'>
             <div className='container'>
